@@ -1,0 +1,40 @@
+body {
+  text-align: center;
+  background-color: rgb(177, 124, 124);
+}
+h1 {
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  color: azure;
+  font-size: 50px;
+}
+
+.board {
+  margin: auto;
+  background-color: white;
+  color: black;
+  width: 250px;
+  height: 250px;
+}
+.cell {
+  background: grey;
+  cursor: pointer;
+  width: 25%;
+  height: 25%;
+  text-align: center;
+}
+.cell:hover {
+  background-color: rgb(196, 193, 193);
+}
+img {
+  width: 30px;
+  height: 30px;
+}
+footer {
+  margin: auto;
+  margin-top: 15px;
+  background-color: aqua;
+  padding: 10px;
+  font-weight: bold;
+  text-align: center;
+  max-width: 50%;
+}
