@@ -7,7 +7,14 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>MineSweeper</h1>
+    <h1 class="head">MineSweeper</h1>
+    <div class="lives">
+      <h1><span class="num-lives">3</span> LIVES LEFT</h1>
+    </div>
+    <div class="buttons">
+      <button onclick="onHintClick(this)" class="hint">💡</button>
+      <button onclick="onSmileyClick()" class="smiley">😃</button>
+    </div>
     <table class="board"></table>
 
     <footer>Shayel Moalem</footer>
