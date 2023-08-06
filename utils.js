@@ -1,9 +1,9 @@
 "use strict";
 
-function onInit() {
-  gBoard = createBoard();
-  renderBoard();
-}
+// function onInit() {
+//   gBoard = createBoard();
+//   renderBoard();
+// }
 
 /////////////////////////////////////////////////////////
 //-------------------Boards and Mats------------------//
@@ -18,22 +18,6 @@ function createMat(rowIdx, colIdx) {
     mat.push(row);
   }
   return mat;
-}
-
-function createBoard() {
-  const board = [];
-  for (var i = 0; i < 10; i++) {
-    board[i] = [];
-    for (var j = 0; j < 10; j++) {
-      board[i][j] = {
-        type: FLOOR,
-        gameElement: null,
-      };
-      if (i === 0 || i === 10 || j === 0 || j === 10) {
-        board[i][j].type = WALL;
-      }
-    }
-  }
 }
 
 function checkNeighbors(board, rowIdx, colIdx) {
