@@ -11,6 +11,7 @@ var gGame = {
   lives: 3,
 };
 // localStorage.bestScore = 100;
+var GsafeClicks = 3;
 var gTimerIntervalId;
 var isFirstClick = true;
 var gBoard;
@@ -18,9 +19,26 @@ var gIsHint = false;
 var gHints = 0;
 var elBestScore = document.querySelector(".best-score");
 elBestScore.innerText = localStorage.bestScore;
-function onInit() {
-  gBoard = buildBoard(gLevel.SIZE);
 
+function onMediumClick() {
+  gLevel.SIZE = 8;
+  gLevel.MINES = 14;
+  resetGame();
+}
+
+function onEasyClick() {
+  gLevel.SIZE = 4;
+  gLevel.MINES = 2;
+  resetGame();
+}
+function onHardClick() {
+  gLevel.SIZE = 12;
+  gLevel.MINES = 32;
+  resetGame();
+}
+
+function init() {
+  gBoard = buildBoard(gLevel.SIZE);
   renderBoard(gBoard);
   setRandomMinesAndCountNegs(gLevel.MINES, gLevel.SIZE);
 }
@@ -119,6 +137,7 @@ function onCellClick(elCell) {
     cell.isShown = true;
     console.log("is mine");
     handleClickOnMine(elCell);
+    return;
   }
   //is mine neighbour :
 
@@ -157,6 +176,7 @@ function handleClickOnMine(elCell) {
     gGame.isOn = false;
     makeSmileySad();
     console.log("game over");
+    clearInterval(gTimerIntervalId);
   }
 }
 
@@ -228,18 +248,23 @@ function addSmileyGlasses() {
   elSmiley.innerText = "😎";
 }
 function resetGame() {
+  gHints = 0;
+  GsafeClicks = 3;
   gGame.secsPassed = 0;
-  //   clearInterval(gTimerIntervalId);
+  clearInterval(gTimerIntervalId);
   gGame.isOn = true;
+  isFirstClick = true;
+  gGame.lives = 3;
   gBoard = buildBoard(gLevel.SIZE);
   renderBoard(gBoard);
   setRandomMinesAndCountNegs(gLevel.MINES, gLevel.SIZE);
-  gGame.lives = 3;
   gGame.shownCount = 0;
   var elLivesSpan = document.querySelector(".lives");
   elLivesSpan.innerText = gGame.lives;
   var elSmiley = document.querySelector(".smiley");
   elSmiley.innerText = "😀";
+  var elTimer = document.querySelector(".timer");
+  elTimer.innerText = 0;
 }
 
 function checkWin() {
@@ -269,10 +294,12 @@ function revealedCellsWhenHint(i, j) {
       if (gBoard[a][x].isMine) {
         elCell.innerText = "💣";
         elCell.style.backgroundColor = "rgb(196, 193, 193)";
+        continue;
       }
       if (gBoard[a][x].minesAroundCount > 0) {
         elCell.innerText = gBoard[a][x].minesAroundCount;
         elCell.style.backgroundColor = "rgb(196, 193, 193)";
+        continue;
       }
       if (gBoard[a][x].minesAroundCount === 0 && !gBoard[a][x].isMine) {
         elCell.innerText = "";
@@ -320,6 +347,36 @@ function getTime() {
   }, 100);
 }
 
+function onSafeClick() {
+  if (GsafeClicks === 0) return;
+
+  var row = getRandomInt(0, gLevel.SIZE);
+  var col = getRandomInt(0, gLevel.SIZE);
+  while (
+    gBoard[row][col].isMine ||
+    gBoard[row][col].isShown ||
+    gBoard[row][col].isMarked
+  ) {
+    var row = getRandomInt(0, gLevel.SIZE);
+    var col = getRandomInt(0, gLevel.SIZE);
+  }
+  var elCell = document.querySelector(`.cell-${row}-${col}`);
+
+  if (gBoard[row][col].minesAroundCount > 0) {
+    elCell.innerText = gBoard[row][col].minesAroundCount;
+    elCell.style.backgroundColor = "rgb(196, 193, 193)";
+  } else {
+    elCell.innerText = "";
+    elCell.style.backgroundColor = "rgb(196, 193, 193)";
+  }
+
+  setTimeout(hideCell1, 2000, row, col, elCell);
+  GsafeClicks--;
+}
+function hideCell1(i, j, elCell) {
+  elCell.style.backgroundColor = "grey";
+  elCell.innerText = "";
+}
 // console.log(gBoard);
 
 // var gLevel = {

@@ -6,15 +6,21 @@
     <title>Mine Sweeper game</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body onload="onInit()">
+  <body onload="init()">
     <h1>MineSweeper</h1>
     <h2 class="best-score-container">
       best Score : <span class="best-score"></span>
     </h2>
     <div class="lives-container">lives left: <span class="lives">3</span></div>
     <div class="timer-container">timer: <span class="timer"></span></div>
-    <button onclick="onHintClick()" class="hint">💡</button>
+    <button onclick="onEasyClick()" class="level easy">easy</button>
+    <button onclick="onMediumClick()" class="level medium">medium</button>
+    <button onclick="onHardClick()" class="level hard">hard</button>
+    <br />
     <button onclick="resetGame()" class="smiley">😀</button>
+    <button onclick="onHintClick()" class="hint">💡</button>
+    <br />
+    <button class="safe-click" onclick="onSafeClick()">Safe click</button>
     <table class="board"></table>
 
     <footer>Shayel Moalem</footer>

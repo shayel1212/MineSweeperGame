@@ -19,6 +19,13 @@ body {
   max-width: 150px;
   margin: auto;
   border-radius: 10px;
+  margin-bottom: 10px;
+}
+.level {
+  font-size: larger;
+  padding: 5px;
+  margin-bottom: 10px;
+  cursor: pointer;
 }
 .smiley {
   font-size: larger;
@@ -32,6 +39,13 @@ body {
   margin-bottom: 10px;
   cursor: pointer;
 }
+.safe-click {
+  padding: 5px;
+  background-color: aqua;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
 
 .board {
   margin: auto;
@@ -44,8 +58,8 @@ body {
   background: rgb(128, 128, 128);
   cursor: pointer;
   text-align: center;
-  width: 25%;
-  height: 25%;
+  width: 1em;
+  height: 1em;
 }
 .cell:hover {
   background-color: rgb(196, 193, 193);
